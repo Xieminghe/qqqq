@@ -1,5 +1,6 @@
 import os
-import os
+import numpy 
+#suoyilei
 def read_cpp_files(folder_path):
     cpp_files = []
     for root, directories, files in os.walk(folder_path):
