@@ -1,6 +1,6 @@
 name: Publish And Deploy Demo # 自动部署的名称
 on:
-  push:
+  push
 
 jobs:
   build-and-deploy:
