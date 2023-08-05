@@ -1,6 +1,9 @@
 import os
-import numpy 
+import numpy as np
 #suoyilei
+
+
+
 def read_cpp_files(folder_path):
     cpp_files = []
     for root, directories, files in os.walk(folder_path):
@@ -30,6 +33,9 @@ def find_keyword_in_files(folder_path, keyword):
     matching_lines = []
     for root, directories, files in os.walk(folder_path):
         for file in files:
+           
+           
+           
             if file.endswith(".cpp") or file.endswith(".hpp"):  # 只搜索 C++ 文件
                 file_path = os.path.join(root, file)
                 with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -46,7 +52,7 @@ def find_keyword_in_files(folder_path, keyword):
 folder_path = "C://pytorch"
 
 # 要搜索的关键代码名字
-keyword = "sub"
+keyword = "subsodk"
 
 # 在指定文件夹中查找包含关键代码名字的文件
 matching_files = find_keyword_in_files(folder_path, keyword)
