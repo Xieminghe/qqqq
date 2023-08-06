@@ -15,7 +15,7 @@ jobs:
     - name: install and build
       run: |   
         
-        npm init -y
+        
         npm install
         npm cache clean --force 
         npm run build
