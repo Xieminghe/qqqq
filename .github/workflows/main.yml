@@ -14,8 +14,8 @@ jobs:
         persist-credentials: false
     - name: install and build
       run: |   
-        
-        
+        npm init -y
+        npm cache clean --force
         npm install
         npm run build --if-present
         npm test
