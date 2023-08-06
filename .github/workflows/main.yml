@@ -17,7 +17,8 @@ jobs:
         
         npm init 
         npm install
-        npm run build
+        npm run build --if-present
+        npm test
 
 
     # 第三步：发布 Release
