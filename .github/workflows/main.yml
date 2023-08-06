@@ -16,9 +16,8 @@ jobs:
       run: |   
         npm cache clean --force 
         npm init -y
-        npm cache clean --force 
         npm install
-        npm run  build:prod
+        npm run  build:test
 
 
     # 第三步：发布 Release
