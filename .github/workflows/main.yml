@@ -36,6 +36,7 @@ jobs:
          draft: false
          prerelease: false
 
+
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
