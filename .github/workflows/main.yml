@@ -47,13 +47,10 @@ jobs:
         script: |
  
          cd /***/qqqq
-          
           curl -L -o release.tgz --compressed https://github.com/Xieminghe/qqqq/releases/download/v1.0.0/release.tgz
-
-
           tar zxvf release.tgz
           npm install --production
-          pm2 reload pm2.config.json
+          
 
 
 
