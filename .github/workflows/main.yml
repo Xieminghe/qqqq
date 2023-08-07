@@ -35,6 +35,11 @@ jobs:
   #      release_name: Release ${{ github.ref }}
   #      draft: false # 是否是草稿
   #      prerelease: false # 是否是预发布
+    - name: Find files to upload
+      run: |
+        find dist -type f > file-list.txt
+      shell: bash
+
   
     - name: Create Release
       id: create_release
