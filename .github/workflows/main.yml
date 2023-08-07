@@ -15,7 +15,10 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Install and Build
+    - name: Switch to Project Directory
+      run: cd qqqq
+
+    - name: Install Dependencies and Build
       run: |
         npm install
         npm run build --if-present
@@ -45,3 +48,4 @@ jobs:
           tar zxvf release.tgz
           npm install --production
           pm2 reload pm2.config.json
+
