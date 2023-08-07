@@ -45,9 +45,11 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /root/qqqq
-          wget https://github.com/Xieminghe/qqqq/releases/latest/download/release.tgz -O release.tgz
-          tar zxvf release.tgz
-          npm install --production
-          pm2 reload pm2.config.json
+ 
+         cd /***/qqqq
+            wget https://github.com/Xieminghe/qqqq/releases/download/v1.0.8/release.tgz -O release.tgz
+            tar zxvf release.tgz
+            /usr/local/bin/npm install --production  # 使用绝对路径执行 npm
+            /usr/local/bin/pm2 reload pm2.config.json  # 使用绝对路径执行 pm2
+
 
