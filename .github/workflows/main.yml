@@ -44,7 +44,7 @@ jobs:
       with:
          files: dist/*  # 上传发布的文件，可以根据项目需要进行调整
          tag_name: v1.0.8
-         release_name: Release v1.0.8
+         name: Release v1.0.8
          draft: false
          prerelease: false
 
