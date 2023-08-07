@@ -37,7 +37,7 @@ jobs:
   #      prerelease: false # 是否是预发布
     - name: Find files to upload
       run: |
-        find dist -type f > file-list.txt
+         find build/dist -type f > file-list.txt
       shell: bash
 
   
