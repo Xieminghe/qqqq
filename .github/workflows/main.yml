@@ -38,8 +38,7 @@ jobs:
   
     - name: Find files to upload
       run: |
-        pwd  # Debug: 输出当前工作目录
-        find build/dist -type f > file-list.txt
+        find ./ -type f > file-list.txt
       shell: bash
   
     - name: Create Release
