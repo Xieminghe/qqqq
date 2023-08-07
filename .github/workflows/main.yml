@@ -49,7 +49,7 @@ jobs:
          cd /***/qqqq
           wget https://github.com/Xieminghe/qqqq/archive/refs/tags/v1.0.0.tar.gz
           tar zxvf v1.0.0.tar.gz
-          
+          npm init -y
           npm install --production
           
 
