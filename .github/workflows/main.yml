@@ -21,7 +21,7 @@ jobs:
 
     - name: Build
       uses: actions/setup-node@master
-    - run: tar -zcvf release.tgz 
+    - run: tar -zcvf release.tgz package.json
       # 把.nuxt、nuxt.config.js等文件，打包压缩为release.tgz
 
     - name: Create Release # 创建Release，可以在仓库看到一个个版本
