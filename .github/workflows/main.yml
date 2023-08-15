@@ -64,8 +64,8 @@ jobs:
           
     - name: run the python
       run: |
-            cd qqqq
-            python import os.py run
+          
+            python import os.py 
           
           
 
