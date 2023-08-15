@@ -1,4 +1,4 @@
-name: Publish And Deploy Demo
+name: Cache Docker Container Build
 
 on:
   push:
@@ -6,65 +6,41 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2.3.1
-      with:
-        persist-credentials: false
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Switch to Project Directory
-      run: cd qqqq
+      - name: Set up Docker
+        uses: docker/setup-docker@v2
 
-    - name: Install Dependencies and Build
-      run: |
-        npm init -y
-        npm install
-        npm run build --if-present
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-          python-version: 3.8
+      - name: Restore cache
+        uses: actions/cache@v2
+        with:
+          path: /var/lib/docker
+          key: ${{ runner.os }}-docker-${{ hashFiles('Dockerfile') }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
 
-    - name: Create Release
-      id: create_release
-      uses: softprops/action-gh-release@v1
-      env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-         files: dist/*  # 上传发布的文件，可以根据项目需要进行调整
-         tag_name: v1.0.0
-         name: Release v1.0.0
-         draft: false
-         prerelease: false
+      - name: Build and cache container
+        run: |
 
-
-    - name: Deploy
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: |
-
- 
-         cd /***/qqqq
-          wget https://github.com/Xieminghe/qqqq/archive/refs/tags/v1.0.0.tar.gz
-          tar zxvf v1.0.0.tar.gz
-          npm init -y
-          npm install --production
-          
-          cd qqqq-1.0.0/qqqq
-          ls
-    
           docker pull sophgo/tpuc_dev:latest
-          docker run --privileged --name myname1234 -v $PWD:/workspace -it sophgo/tpuc_dev:latest
+          docker run --privileged --name myname1234 -v $PWD:/workspace -it sophgo/tpuc_dev:latest -c' 
+          source ./envsetup.sh
+          ./build.sh'
           
-          cd tpu-mlir/
-          . envsetup.sh 
+          docker build -t myname1234 .
+          docker save -o myname1234.tar myname1234
+
+      - name: Save cache
+        uses: actions/cache@v2
+        with:
+          path: /var/lib/docker
+          key: ${{ runner.os }}-docker-${{ hashFiles('Dockerfile') }}
+
  
     
           
