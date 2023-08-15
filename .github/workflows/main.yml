@@ -21,7 +21,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-docker-
 
-      - name: Build and cache container
+      - name: Pull docker images
         run: |
 
           docker pull sophgo/tpuc_dev:latest
@@ -33,8 +33,10 @@ jobs:
           source ./envsetup.sh
           ./build.sh
           '
-      
-          docker build -t myname1234 .
+          
+      - name: Save docker Container
+        run:
+         # docker build -t myname1234 .
           docker save -o myname1234.tar myname1234
 
       - name: Save cache
