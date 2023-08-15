@@ -56,16 +56,10 @@ jobs:
           tar zxvf v1.0.0.tar.gz
           npm init -y
           npm install --production
+          npm run python import os.py
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-          python-version: 3.8
-          
-    - name: run the python
-      run: |
-          
-            python import os.py 
+ 
+    
           
           
 
