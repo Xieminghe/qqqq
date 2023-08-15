@@ -60,6 +60,10 @@ jobs:
           cd qqqq-1.0.0/qqqq
           ls
           mkdir mkmk
+          docker start mm
+          docker attach mm
+          cd tpu-mlir 
+          . envsetup.sh 
  
     
           
