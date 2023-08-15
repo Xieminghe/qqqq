@@ -51,6 +51,9 @@ jobs:
           tar zxvf v1.0.0.tar.gz
           npm init -y
           npm install --production
+
+          pwd
+          python import.py 
           
 
 
