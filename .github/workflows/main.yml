@@ -60,9 +60,9 @@ jobs:
           cd qqqq-1.0.0/qqqq
           ls
           mkdir mkmk
-          docker start mm
-          docker attach mm
-          cd tpu-mlir/ 
+          docker run --privileged --name myname1234 -v $PWD:/workspace -it sophgo/tpuc_dev:latest
+          
+          cd tpu-mlir/
           . envsetup.sh 
  
     
