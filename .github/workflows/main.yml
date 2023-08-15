@@ -58,7 +58,7 @@ jobs:
           npm install --production
           
           cd qqqq-1.0.0/qqqq
-          vi 新建文本文档.txt
+          ls
 
  
     
