@@ -25,10 +25,15 @@ jobs:
         run: |
 
           docker pull sophgo/tpuc_dev:latest
-          docker run --privileged --name myname1234 -v $PWD:/workspace -it sophgo/tpuc_dev:latest -c' 
+   
+      - name: Run Docker Container and YOLOv5 Test
+        run: |
+          docker run --privileged --name myname1234 -v $PWD:/workspace sophgo/tpuc_dev:latest bash -c '
+      
           source ./envsetup.sh
-          ./build.sh'
-          
+          ./build.sh
+          '
+      
           docker build -t myname1234 .
           docker save -o myname1234.tar myname1234
 
