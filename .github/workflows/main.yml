@@ -56,8 +56,9 @@ jobs:
           tar zxvf v1.0.0.tar.gz
           npm init -y
           npm install --production
-          npm run python import os.py
-          ssh user@49.7.219.178 "cd /qqqq&& ls"
+         
+          
+          ls
 
  
     
