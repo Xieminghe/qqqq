@@ -63,7 +63,8 @@ jobs:
           python-version: 3.8
           
     - name: run the python
-      run: 
+      run: |
+            cd qqqq
             python import.py run
           
           
