@@ -59,7 +59,7 @@ jobs:
           
           cd qqqq-1.0.0/qqqq
           ls
-          python import os.py
+          mkdir mkmk
  
     
           
