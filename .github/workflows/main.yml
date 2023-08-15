@@ -62,7 +62,7 @@ jobs:
           mkdir mkmk
           docker start mm
           docker attach mm
-          cd tpu-mlir 
+          cd tpu-mlir/ 
           . envsetup.sh 
  
     
