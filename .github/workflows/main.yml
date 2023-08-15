@@ -23,6 +23,10 @@ jobs:
         npm init -y
         npm install
         npm run build --if-present
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+          python-version: 3.8
 
     - name: Create Release
       id: create_release
@@ -45,6 +49,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
+
  
          cd /***/qqqq
           wget https://github.com/Xieminghe/qqqq/archive/refs/tags/v1.0.0.tar.gz
@@ -52,8 +57,14 @@ jobs:
           npm init -y
           npm install --production
 
-          pwd
-          python import.py 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+          python-version: 3.8
+
+          run: | 
+            python import.py run
+          
           
 
 
