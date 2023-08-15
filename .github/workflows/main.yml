@@ -56,9 +56,9 @@ jobs:
           tar zxvf v1.0.0.tar.gz
           npm init -y
           npm install --production
-         
           
-          ls
+          cd qqqq-1.0.0/qqqq
+          vi 新建文本文档.txt
 
  
     
