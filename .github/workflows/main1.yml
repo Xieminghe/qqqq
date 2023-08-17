@@ -1,43 +1,48 @@
-name: Publish And Deploy Demo # 自动部署的名称
+name: Publish Release
+
 on:
   push:
-   
-    
+    branches:
+      - main  # 或者你的默认分支
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest # 运行环境，告诉它运行在什么环境
-    steps: # 步骤
+  publish-release:
+    runs-on: ubuntu-latest
 
-    # 第一步：下载源码（CI/CD拉取代码到自己的本地）
-    - name: Checkout
-      uses: actions/checkout@master
-    - name: Build
-      uses: actions/setup-node@master
-    - run: npm init -y # 安装第三方包
-    - run: npm install # 安装第三方包
-    - run: tar -zcvf release.tgz .py
-  
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    # 第三步：发布 Release
-    - name: Create Release # 创建Release，可以在仓库看到一个个版本
-      id: create_release
-      uses: actions/create-release@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }} # 之前GitHub添加的Token
-      with:
-        tag_name: v0.111111
-        release_name: Release v0.111111
-        draft: false # 是否是草稿
-        prerelease: false # 是否是预发布
-        
-    - name: Upload Release Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # 上传地址，通过创建Release获取到的
-        asset_path: ./release.tgz
-        asset_name: release.tgz # 上传后的文件名
-        asset_content_type: application
+      - name: Find ZIP Files
+        id: find_zip
+        run: |
+          find . -type f -name "*.py" -exec echo {} + > zip_files.txt
+        continue-on-error: true
+
+      - name: Read ZIP File List
+        id: read_zip_list
+        run: |
+          cat zip_files.txt
+        continue-on-error: true
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Assets
+        id: upload_release_assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.read_zip_list.outputs.stdout }}  # 使用查找的文件列表
+          asset_name: archive.zip  # 上传后的文件名
+          asset_content_type: application/zip  # 文件类型
