@@ -18,7 +18,7 @@ jobs:
         id: find_py
         run: |
           find . -type f -name "*.py" -exec echo {} + > py_files.txt
-          
+          ssh=find . -name '*.py' |grep test  
         continue-on-error: true
 
       - name: Read PY File List
@@ -45,6 +45,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{find . -name '*.py' |grep test   }} # 使用查找的文件列表
+          asset_path: ${{ssh}} # 使用查找的文件列表
           asset_name: py_files.zip  # 上传后的文件名
           asset_content_type: application/zip  # 文件类型
