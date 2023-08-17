@@ -14,7 +14,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
+        
+      - name: Get system time
+        id: system-time
+        run: echo "::set-output name=ss::$(date +'%Y-%m-%d %H:%M:%S')"
     
 
       - name: Create Release
@@ -23,8 +26,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name:  v${{ steps.system-time.outputs.time }}
-          release_name:  v${{ steps.system-time.outputs.time }}
+          tag_name:  v${{ steps.system-time.outputs.ss }}
+          release_name:  v${{ steps.system-time.outputs.ss }}
           draft: false
           prerelease: false
           
