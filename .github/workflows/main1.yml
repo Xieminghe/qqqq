@@ -3,6 +3,7 @@ name: release public
 on:
   push:
   
+  
 
 jobs:
   build:
@@ -15,8 +16,7 @@ jobs:
       - name: Create Release # 创建Release，可以在仓库看到一个个版本
         id: create_release
         uses: actions/create-release@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }} # 之前GitHub添加的Token
+     
       
       # 第四步：上传构建结果到 Release（把打包的tgz上传到Release）
       - name: Upload Release Asset
