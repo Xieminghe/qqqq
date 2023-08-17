@@ -1,5 +1,6 @@
 name: Publish Release
 
+
 on:
   push:
     branches:
@@ -13,23 +14,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Find ZIP Files
-        id: find_zip
+      - name: Find PY Files
+        id: find_py
         run: |
-          find . -type f -name "*.py" -exec echo {} + > zip_files.txt
+          find . -type f -name "*.py" -exec echo {} + > py_files.txt
         continue-on-error: true
 
-      - name: Read ZIP File List
-        id: read_zip_list
+      - name: Read PY File List
+        id: read_py_list
         run: |
-          cat zip_files.txt
+          cat py_files.txt
         continue-on-error: true
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ github.run_number }}
           release_name: Release v${{ github.run_number }}
@@ -40,9 +41,9 @@ jobs:
         id: upload_release_assets
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.read_zip_list.outputs.stdout }}  # 使用查找的文件列表
-          asset_name: archive.zip  # 上传后的文件名
+          asset_path: ${{ steps.read_py_list.outputs.stdout }}  # 使用查找的文件列表
+          asset_name: py_files.zip  # 上传后的文件名
           asset_content_type: application/zip  # 文件类型
