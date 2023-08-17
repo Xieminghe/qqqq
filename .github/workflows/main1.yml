@@ -23,8 +23,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{359}}
-          release_name: Release v${{359}}
+          tag_name: v${{3590}}
+          release_name: Release v${{3590}}
           draft: false
           prerelease: false
           
