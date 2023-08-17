@@ -2,7 +2,7 @@ name: release public
 
 on:
   push:
-      tags:
+    
      
   
   
