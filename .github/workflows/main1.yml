@@ -19,6 +19,7 @@ jobs:
         run: |
           find . -type f -name "*.py" -exec echo {} + > py_files.txt
           ssh=find . -name '*.py' |grep test  
+          cat ssh
         continue-on-error: true
 
       - name: Read PY File List
