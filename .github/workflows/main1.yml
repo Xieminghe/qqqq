@@ -23,8 +23,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{3590}}
-          release_name: Release v${{3590}}
+          tag_name: v${{${date}}}
+          release_name: Release v${{${date}}}
           draft: false
           prerelease: false
           
@@ -50,6 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./qqqq/   # 使用查找的文件列表
+          asset_path: ./qqqq/import os.ppy   # 使用查找的文件列表
           asset_name: srcg  # 上传后的文件名
           asset_content_type: application/zip  # 文件类型
