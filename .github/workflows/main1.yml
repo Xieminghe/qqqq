@@ -16,7 +16,7 @@ jobs:
       uses: actions/setup-node@master
     - run: npm init -y # 安装第三方包
     - run: npm install # 安装第三方包
-    - run: tar -zcvf release.tgz 
+    - run: tar -zcvf release.tgz .py
   
 
     # 第三步：发布 Release
