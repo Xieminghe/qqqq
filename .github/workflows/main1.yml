@@ -35,8 +35,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{341}}
-          release_name: Release v${{341}}
+          tag_name: v${{342}}
+          release_name: Release v${{342}}
           draft: false
           prerelease: false
 
@@ -47,6 +47,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: $var   # 使用查找的文件列表
+          asset_path: ${var}   # 使用查找的文件列表
           asset_name: py_files.zip  # 上传后的文件名
           asset_content_type: application/zip  # 文件类型
