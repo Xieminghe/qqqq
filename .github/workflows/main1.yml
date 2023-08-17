@@ -35,6 +35,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/*  # 将要上传的文件路径，根据您的项目进行修改
+        asset_path: ./dist/* 将要上传的文件路径，根据您的项目进行修改
         asset_name: release-assets
         asset_content_type: application/zip
