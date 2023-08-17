@@ -18,7 +18,7 @@ jobs:
         id: find_py
         run: |
           find . -type f -name "*.py" -exec echo {} + > py_files.txt
-          var=$(cat somefile.txt)
+          var=$(cat py_files.txt)
           echo ${vars}
          
         continue-on-error: true
@@ -35,8 +35,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{311}}
-          release_name: Release v${{311}}
+          tag_name: v${{341}}
+          release_name: Release v${{341}}
           draft: false
           prerelease: false
 
