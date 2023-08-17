@@ -23,8 +23,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name:  ${{ steps.system-time.outputs.time }}
-          release_name:  ${{ steps.system-time.outputs.time }}
+          tag_name:  v${{ steps.system-time.outputs.time }}
+          release_name:  v${{ steps.system-time.outputs.time }}
           draft: false
           prerelease: false
           
