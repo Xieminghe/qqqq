@@ -14,11 +14,14 @@ jobs:
 
 
 
+      # 第四步：上传构建结果到 Release（把打包的tgz上传到Release）
       - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+        id: upload-release-asset
+        uses: actions/upload-release-asset@master
+        env:
+            GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}  # 上传的 URL，从事件中获取
-          asset_path: ./my_asset.zip  # 要上传的文件路径
-          asset_name: my_asset.zip  # 要显示的文件名
-          asset_content_type: application/zip  # 文件的内容类型
-          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub Token，用于权限认证
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # 上传地址，通过创建Release获取到的
+          asset_path: ./release.tgz # 要上传文件
+          asset_name: release.tgz # 上传后的文件名
+          asset_content_type: application
