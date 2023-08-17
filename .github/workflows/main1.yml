@@ -18,8 +18,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }} # 之前GitHub添加的Token
       with:
-        tag_name: v1.0.90
-        release_name: release  v1.0.90
+        tag_name: v1.0.901
+        release_name: release  v1.0.901
         draft: false # 是否是草稿
         prerelease: false # 是否是预发布
 
