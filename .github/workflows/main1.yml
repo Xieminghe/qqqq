@@ -26,10 +26,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name:  re ${{ steps.system-time.outputs.ss }}
-          release_name:  ${{ steps.system-time.outputs.ss }}
-          draft: false
-          prerelease: false
+    
+            tag_name: V0.${{ github.run_id }}.dev
+            name: V0.${{ github.run_id }}.dev
+            body: TODO New Release.
+            draft: false  # 是否是草稿
+            prerelease: false # 是否是预览版
           
       - name: Find PY Files
         id: find_py
