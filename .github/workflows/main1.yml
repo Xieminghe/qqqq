@@ -57,5 +57,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ steps.find_py_files.outputs.py_files }}   # 使用查找的文件列表
-          asset_name: srcg  # 上传后的文件名
+          asset_name: srcg.gz  # 上传后的文件名
           asset_content_type: application/zip  # 文件类型
