@@ -1,55 +1,21 @@
-name: Cache Docker Container Build
+name: Save Tag to Env
 
 on:
   push:
-  
+    tags:
+      - '*'
 
 jobs:
-  build:
+  save-tag:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-
-      - name: Restore cache
-        uses: actions/cache@v2
-        with:
-          path: /var/lib/docker
-          key: ${{ runner.os }}-docker-${{ hashFiles('Dockerfile') }}
-          restore-keys: |
-            ${{ runner.os }}-docker-
-
-      - name: Pull docker images
-        run: |
-
-          docker pull sophgo/tpuc_dev:latest
-   
-      - name: Run Docker Container and YOLOv5 Test
-        run: |
-          docker run --privileged --name myname1234 -v $PWD:/workspace sophgo/tpuc_dev:latest bash -c '
-          cd tpu-mlir
-          source ./envsetup.sh
-          ./build.sh
-          '
-          
-      - name: Save docker Container
-        run:
-         # docker build -t myname1234 .
-          docker save -o myname1234.tar myname1234
-
-      - name: Save cache
-        uses: actions/cache@v2
-        with:
-          path: /var/lib/docker
-          key: ${{ runner.os }}-docker-${{ hashFiles('Dockerfile') }}
-
- 
-    
-          
-          
-
-
-
-
+    - name: Set Tag as Environment Variable
+      run: |
+        if [[ $GITHUB_REF == refs/tags/* ]]; then
+          TAG=${GITHUB_REF#refs/tags/}
+          echo "TAG=${TAG}" >> $GITHUB_ENV
+        fi
