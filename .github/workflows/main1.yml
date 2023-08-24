@@ -1,24 +1,26 @@
-name: Publish Release
-
+name: Create Release on Tag Push
 
 on:
   push:
-    branches:
-    
-      - main  # 或者你的默认分支
+    tags:
+      - '*'
 
 jobs:
-  publish-release:
+  create_release:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
-        
-      - name: Get system time
-        id: system-time
-        run: echo "::set-output name=ss::$(date +'%Y-%m-%d %H:%M:%S')"
-    
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Get Tag Info
+        id: get_tag_info
+        run: echo "TAG=${{ github.ref }}"
 
       - name: Create Release
         id: create_release
@@ -26,36 +28,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-    
-            tag_name: V0.${{ github.run_id }}.dev
-            name: V0.${{ github.run_id }}.dev
-            body: TODO New Release.
-            draft: false  # 是否是草稿
-            prerelease: false # 是否是预览版
-
-      - name: Find Python Files
-        id: find_py_files
-        run: |
-          py_files=$(find . -type f -name "*.py")
-          echo "::set-output name=py_files::$py_files"
-        continue-on-error: true
-
-      - name: Display Found Python Files
-        run: |
-          echo "Found Python files:"
-          echo "${{ steps.find_py_files.outputs.py_files }}"
-
-          
-
-         
-        continue-on-error: true
-      - name: Upload Release Assets
-        id: upload_release_assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.find_py_files.outputs.py_files }}   # 使用查找的文件列表
-          asset_name: srcg.gz  # 上传后的文件名
-          asset_content_type: application/zip  # 文件类型
+          files: dist/*  # Add your release files pattern here
+          release-name: Release ${{ steps.get_tag_info.outputs.TAG }}
+          tag_name: ${{ github.ref }}
