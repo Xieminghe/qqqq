@@ -3,7 +3,7 @@ name: Save Tag to Env
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   save-tag:
