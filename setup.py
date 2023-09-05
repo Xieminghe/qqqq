@@ -16,7 +16,7 @@ author = "Minghe.xie"
 author_email = "1633828622@qq.com"
 
 # 项目的URL
-url = "https://upload.pypi.org/legacy/ dist/*"
+url = "https://upload.pypi.org/legacy/dist/*"
 
 # 项目的许可证
 # license = "MIT"

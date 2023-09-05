@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: myproject
+Version: 0.1.0
+Summary: A simple Python project.
+Home-page: https://upload.pypi.org/legacy/ dist/*
+Author: Minghe.xie
+Author-email: 1633828622@qq.com
