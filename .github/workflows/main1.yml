@@ -1,0 +1,32 @@
+name: Create Release on Tag Push
+
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Get Tag Info
+        id: get_tag_info
+        run: echo "TAG=${{ github.ref }}"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: dist/*  # Add your release files pattern here
+          release-name: Release ${{ steps.get_tag_info.outputs.TAG }}
+          tag_name: ${{ github.ref }}
