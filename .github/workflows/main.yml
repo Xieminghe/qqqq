@@ -6,19 +6,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    # 第二步：打包构建
-    - name: Build
-      uses: actions/setup-node@master
-    - run: npm install npm@latest -g 
-    - run: npm init -y
-    - run: npm install # 安装第三方包
-    - run: npm cache clean --force 
-    - run: npm run build # 打包
-    - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
-      # 把.nuxt、nuxt.config.js等文件，打包压缩为release.tgz
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
 
     - name: Build and Publish
       env:
