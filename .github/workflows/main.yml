@@ -1,24 +1,28 @@
-name: Save Tag to Env
+name: Publish to PyPI
 
 on:
-  push:
-   branches:
-    
-      - main  # 或者你的默认分支
-   tags:
-      - '*'
+  release:
+    types:
+      - created
 
 jobs:
-  save-tag:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set Tag as Environment Variable
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10
+
+    - name: Build and Publish
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
-        if [[ $GITHUB_REF == refs/tags/* ]]; then
-          TAG=${GITHUB_REF#refs/tags/}
-          echo "TAG=${TAG}" >> $GITHUB_ENV
-        fi
+        python setup.py sdist bdist_wheel
+        pip install twine
+        twine upload dist/*
