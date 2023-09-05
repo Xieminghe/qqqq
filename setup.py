@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-import numpy
+
 # 项目名称
 name = "myproject"
 
@@ -23,8 +23,7 @@ url = "https://github.com/Xieminghe/qqqq"
 
 # 项目的依赖项
 install_requires = [
-      
-      numpy>=1.0
+      "numpy>=1.0"
     # 依赖项列表，例如 "numpy>=1.0" 或 "requests"
 ]
 
