@@ -29,5 +29,6 @@ jobs:
       run: |
         python setup.py sdist 
         pip install twine
-        twine upload dist/*
+        twine upload dist/*  --verbose
+
 
