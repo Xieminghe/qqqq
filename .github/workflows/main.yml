@@ -29,6 +29,8 @@ jobs:
       run: |
         python setup.py sdist 
         pip install twine
+        twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+
         twine upload dist/*  --verbose
 
 
