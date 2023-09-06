@@ -28,8 +28,13 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPITOKEN }}
       run: |
+       
         python setup.py sdist 
+        
         pip install twine
+        
+        python setup.py register
+         
         twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
         twine upload dist/*  --verbose
