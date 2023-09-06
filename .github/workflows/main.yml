@@ -33,7 +33,7 @@ jobs:
         
         pip install twine
 
-        python setup.py register --quiet
+     
          
         twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
