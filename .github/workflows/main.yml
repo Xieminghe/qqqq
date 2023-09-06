@@ -32,8 +32,8 @@ jobs:
         python setup.py sdist 
         
         pip install twine
-        
-        python setup.py --no-input sdist
+     
+        python setup.py 
 
         python setup.py register
          
