@@ -29,11 +29,9 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPITOKEN }}
       run: |
        
-        python setup.py sdist 
+        python setup.py sdist --quiet
         
         pip install twine
-     
-        python setup.py sdist 
 
         python setup.py register
          
