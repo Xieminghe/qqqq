@@ -29,11 +29,11 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPITOKEN }}
       run: |
        
-        python setup.py sdist --quiet
+        python setup.py sdist -
         
         pip install twine
 
-        python setup.py register
+        python setup.py register -quiet
          
         twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
